@@ -1,0 +1,26 @@
+/* En el root definimos las variables CSS a inyectar en el CSS de un componente */
+:root {
+  --error-color: rgba(220,53,69, 1);
+  --error-bg-color: rgba(220,53,69, 0.2);
+  --error-bg-color-dark: rgba(220,53,69, 0.4);
+}
+
+/* Move down content because we have a fixed navbar that is 3.5rem tall */
+body {
+  padding-top: 3.5rem;
+}
+
+.spinner {
+  width: 50px;
+  height: auto;
+}
+
+.jumbotron {
+  background-color: #ff2b24;
+  background-image: url("https://www.transparenttextures.com/patterns/diagmonds.png");
+}
+
+.jumbotron h1 {
+  color: white;
+}
+

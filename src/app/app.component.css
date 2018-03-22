@@ -1,0 +1,27 @@
+/* Implementando variables CSS definidas en jumbotron.css */
+.error{
+    color: var(--error-color);
+    border-color:var(--error-color);
+}
+
+.error-input-group-prepend{
+    color: var(--error-color);
+    border-color:var(--error-color);
+    background-color: var(--error-bg-color-dark);
+}
+.error::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+    color: var(--error-color);
+    opacity: 1; /* Firefox */
+}
+
+.error:-ms-input-placeholder { /* Internet Explorer 10-11 */
+    color: var(--error-color);
+}
+
+.error::-ms-input-placeholder { /* Microsoft Edge */
+    color: var(--error-color);
+}
+
+.success{
+    color: 	rgb(0,255,255);
+} 

@@ -1,0 +1,80 @@
+<!-- Main jumbotron for a primary marketing message or call to action -->
+<div class="jumbotron">
+    <div class="container">
+      <h1 class="display-3">{{title}}</h1>
+      <form class="form-inline" [formGroup]="productoForm" (ngSubmit)="onProductoFormSubmit()">
+        
+        <label class="sr-only" for="name">Nombre</label>
+        <input type="text" class="form-control mb-2 mr-sm-2" id="name" formControlName="name" placeholder="Nombre del producto *" [ngClass]="{'error': validarCampo('name') }">
+
+        <label class="sr-only" for="price">Precio</label>
+        <div class="input-group mb-2 mr-sm-2">
+          <div class="input-group-prepend">
+            <div class="input-group-text" [ngClass]="{'error-input-group-prepend': validarCampo('price')}">$</div>
+          </div>
+          <input type="text" class="form-control" id="price" placeholder="Precio *" formControlName="price" [ngClass]="{'error': validarCampo('price')}">
+        </div>
+
+        <label class="sr-only" for="imagelink">Image URL Imagen</label>
+        <input type="text" class="form-control mb-2 mr-sm-2" id="imagelink" placeholder="URL Imagen *" formControlName="imagelink" [ngClass]="{'error': validarCampo('imagelink')}">
+      
+        <button type="submit" class="form-control btn btn-primary mb-2" *ngIf="!productoIdToUpdate">Agregar</button>
+        <button type="submit" class="form-control btn btn-primary mb-2" *ngIf="productoIdToUpdate">Editar</button>
+        <button type="submit" class="form-control btn btn-secondary mb-2" (click)="backToCrearProducto()" *ngIf="productoIdToUpdate">Cancelar</button>  
+      </form>
+      <br/>
+      <div *ngIf="statusCode; else processing">
+        <div *ngIf="statusCode === 201" [ngClass] = "'success'">
+            Producto agregado con éxito.
+        </div>   
+        <div *ngIf="statusCode === 409" [ngClass] = "'success'">
+            El producto ya existe.
+        </div>   	
+        <div *ngIf="statusCode === 200" [ngClass] = "'success'">
+             Producto actualizado con éxito.
+        </div>   	      
+        <div *ngIf="statusCode === 204" [ngClass] = "'success'">
+             El producto ha sido eliminado.
+        </div>   	   
+        <div *ngIf="statusCode === 500" [ngClass] = "'error'">
+              Internal Server Error.
+        </div>	
+      </div>
+      <ng-template #processing>
+          <img *ngIf="requestProcessing" src="assets/img/spinner.gif" class="spinner">
+      </ng-template>
+    </div>
+  </div>
+
+  <div class="container">
+    <!-- Example row of columns -->
+    <div class="row">
+      <div class="col-md-12">
+          <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Nombre</th>
+                  <th scope="col">Precio</th>
+                  <th scope="col">URL Imagen</th>
+                  <th scope="col"></th>
+                  <th scope="col"></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let producto of allProductos; let i = index;">
+                  <th scope="row">{{i+1}}</th>
+                  <td>{{producto.name}}</td>
+                  <td>${{producto.price}}</td>
+                  <td>{{producto.imagelink}}</td>
+                  <td><button type="button" class="btn btn-primary" (click)="editarProducto(producto.$key)">Editar</button></td>
+                  <td><button type="button" class="btn btn-danger" (click)="borrarProducto(producto.$key)">Eliminar</button></td>
+                </tr>
+              </tbody>
+            </table>
+      </div> 
+    </div>
+
+    <hr>
+
+  </div> <!-- /container -->
